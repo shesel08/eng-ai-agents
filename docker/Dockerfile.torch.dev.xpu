@@ -14,6 +14,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV UV_EXTRA=${UV_EXTRA}
 ENV WORKSPACE_DIR=${WORKSPACE_DIR}
 ENV WORKSPACE_USER=${WORKSPACE_USER}
+ENV DEBIAN_FRONTEND=noninteractive
 
 
 RUN \
@@ -26,7 +27,7 @@ RUN \
 RUN apt-get clean && \
     bash -lc 'for i in 1 2 3; do (apt-get update --allow-releaseinfo-change || apt-get update) && apt-get install -y --no-install-recommends --fix-missing \
         build-essential binutils \
-       cmake curl \
+        cmake curl \
         dbus-x11 \
         ffmpeg \
         gdb gcc g++ gfortran git \
@@ -64,8 +65,9 @@ RUN apt-get clean && \
         graphviz-dev \
         && locale-gen en_US.UTF-8 \
         && LC_ALL=en_US.UTF-8 \
-        && rm -rf /var/lib/apt/lists/* && break || sleep 5; done' && \
-        apt-get clean
+        && break || sleep 5; done' && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
 RUN pip3 install --no-cache-dir \
         pip \
@@ -73,7 +75,7 @@ RUN pip3 install --no-cache-dir \
         wheel \
         cython
 
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/xpu
 
 # Install UV with caching
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/

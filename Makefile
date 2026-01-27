@@ -6,7 +6,7 @@ export PYTHONPATH = src
 check_dirs := examples tests src utils
 VENV_DIR := .venv
 VENV_PY := $(VENV_DIR)/bin/python
-UV := /usr/bin/uv
+UV := /home/sheema08/.local/bin/uv
 
 # Create venv with access to system packages (from stage 0 container)
 $(VENV_DIR)/bin/activate:
@@ -112,13 +112,21 @@ docker-run-gpu:
 	docker run --gpus all -it --rm \
 		-v $(PWD):/workspace \
 		-w /workspace \
-		eng-ai-agents:gpu
+		eng-ai-agents-torch.dev:gpu
 
 docker-run-cpu:
 	docker run -it --rm \
 		-v $(PWD):/workspace \
 		-w /workspace \
-		eng-ai-agents:cpu
+		eng-ai-agents-torch.dev.cpu:latest
+
+docker-run-xpu:
+	docker run -it --rm \
+		--device=/dev/dri:/dev/dri \
+		--group-add=video \
+		-v $(PWD):/workspace \
+		-w /workspace \
+		eng-ai-agents-torch.dev.xpu:latest
 
 # Development setup
 setup-dev: install-dev
