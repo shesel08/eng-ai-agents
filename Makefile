@@ -101,24 +101,31 @@ venv-recreate:
 
 # Docker targets
 docker-build-gpu:
-	docker build -f docker/Dockerfile.nvidia.dgpu -t eng-ai-agents:gpu .
+	docker build -f docker/Dockerfile.torch.dev.gpu -t eng-ai-agents:gpu .
 
 docker-build-cpu:
-	docker build -f docker/Dockerfile.cpu.amd64 -t eng-ai-agents:cpu .
+	docker build -f docker/Dockerfile.torch.dev.cpu -t eng-ai-agents:cpu .
 
-docker-build: docker-build-gpu docker-build-cpu
+docker-build-xpu:
+	docker build -f docker/Dockerfile.torch.dev.xpu -t eng-ai-agents:xpu .
+
+docker-build-ros:
+	docker build -f docker/Dockerfile.ros.dev.gpu -t eng-ai-agents:ros .
+
+
+docker-build: docker-build-gpu docker-build-cpu docker-build-ros
 
 docker-run-gpu:
 	docker run --gpus all -it --rm \
 		-v $(PWD):/workspace \
 		-w /workspace \
-		eng-ai-agents-torch.dev:gpu
+		eng-ai-agents:gpu
 
 docker-run-cpu:
 	docker run -it --rm \
 		-v $(PWD):/workspace \
 		-w /workspace \
-		eng-ai-agents-torch.dev.cpu:latest
+		eng-ai-agents:cpu
 
 docker-run-xpu:
 	docker run -it --rm \
@@ -126,7 +133,13 @@ docker-run-xpu:
 		--group-add=video \
 		-v $(PWD):/workspace \
 		-w /workspace \
-		eng-ai-agents-torch.dev.xpu:latest
+		eng-ai-agents:xpu
+
+docker-run-ros:
+	docker run --gpus all -it --rm \
+		-v $(PWD):/workspace \
+		-w /workspace \
+		eng-ai-agents:ros
 
 # Development setup
 setup-dev: install-dev

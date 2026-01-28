@@ -15,18 +15,19 @@ ENV UV_EXTRA=${UV_EXTRA}
 ENV WORKSPACE_DIR=${WORKSPACE_DIR}
 ENV WORKSPACE_USER=${WORKSPACE_USER}
 
-
 RUN \
     --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache/apt/archives \
-    bash -lc 'for i in 1 2 3; do (apt-get update --allow-releaseinfo-change || apt-get update) && apt-get install -y --no-install-recommends --fix-missing ca-certificates curl unzip && break || sleep 5; done' && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates curl  unzip && \
     rm -rf /var/lib/apt/lists/*
 
 
 RUN apt-get clean && \
-    bash -lc 'for i in 1 2 3; do (apt-get update --allow-releaseinfo-change || apt-get update) && apt-get install -y --no-install-recommends --fix-missing \
+    apt-get update && \
+    apt-get install -y --no-install-recommends --fix-missing \
         build-essential binutils \
-       cmake curl \
+        cmake cmake-qt-gui curl \
         dbus-x11 \
         ffmpeg \
         gdb gcc g++ gfortran git \
@@ -64,8 +65,8 @@ RUN apt-get clean && \
         graphviz-dev \
         && locale-gen en_US.UTF-8 \
         && LC_ALL=en_US.UTF-8 \
-        && rm -rf /var/lib/apt/lists/* && break || sleep 5; done' && \
-        apt-get clean
+        && rm -rf /var/lib/apt/lists/* \
+        && apt-get clean
 
 RUN pip3 install --no-cache-dir \
         pip \
@@ -87,11 +88,10 @@ RUN curl -LO https://quarto.org/download/latest/quarto-linux-amd64.deb && \
     dpkg -i quarto-linux-amd64.deb
 #RUN quarto install tinytex
 
-RUN bash -lc 'for i in 1 2 3; do (apt-get update --allow-releaseinfo-change || apt-get update) && apt-get install -y --no-install-recommends gnupg dirmngr && break || sleep 5; done' && \
-    curl -fsSL https://downloads.1password.com/linux/keys/1password.asc | gpg --dearmor > /usr/share/keyrings/1password-archive-keyring.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main" > /etc/apt/sources.list.d/1password.list && \
-    bash -lc 'for i in 1 2 3; do (apt-get update --allow-releaseinfo-change || apt-get update) && apt-get install -y --no-install-recommends 1password-cli && break || sleep 5; done' && \
-    rm -rf /var/lib/apt/lists/*
+RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --dearmor > /usr/share/keyrings/1password-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main" > /etc/apt/sources.list.d/1password.list \
+    && apt-get update \
+    && apt-get install -y 1password-cli
 
 # Create workspace directory
 WORKDIR ${WORKSPACE_DIR}
