@@ -6,7 +6,7 @@ export PYTHONPATH = src
 check_dirs := examples tests src utils
 VENV_DIR := .venv
 VENV_PY := $(VENV_DIR)/bin/python
-UV := /home/sheema08/.local/bin/uv
+UV := /usr/bin/uv
 
 # Create venv with access to system packages (from stage 0 container)
 $(VENV_DIR)/bin/activate:
@@ -151,7 +151,7 @@ ci-quality: lint-check type-check
 ci-test: test-cov
 
 start:
-	$(MAKE) venv-recreate
+	$(MAKE) venv
 	$(MAKE) deps-sync
 	$(MAKE) install
 	@echo "To activate the virtual environment, run: source .venv/bin/activate"
