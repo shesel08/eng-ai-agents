@@ -113,7 +113,7 @@ docker-build-ros:
 	docker build -f docker/Dockerfile.ros.dev.gpu -t eng-ai-agents:ros .
 
 
-docker-build: docker-build-gpu docker-build-cpu docker-build-ros
+docker-build: docker-build-cpu
 
 docker-run-gpu:
 	docker run --gpus all -it --rm \

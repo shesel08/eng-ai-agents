@@ -15,6 +15,10 @@ ENV UV_EXTRA=${UV_EXTRA}
 ENV WORKSPACE_DIR=${WORKSPACE_DIR}
 ENV WORKSPACE_USER=${WORKSPACE_USER}
 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key --keyring /usr/share/keyrings/yarn.gpg add - \
+    && echo "deb [signed-by=/usr/share/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && apt-get install -y yarn
+
 RUN \
     --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache/apt/archives \
