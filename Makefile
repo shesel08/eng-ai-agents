@@ -8,10 +8,20 @@ VENV_DIR := .venv
 VENV_PY := $(VENV_DIR)/bin/python
 UV := /usr/bin/uv
 
+# Find Python 3.11+ (prefer /usr/local/bin/python for PyTorch container compatibility)
+PYTHON := $(shell \
+	for cmd in /usr/local/bin/python /usr/bin/python3; do \
+		if [ -x "$$cmd" ] && $$cmd --version 2>/dev/null | grep -qE "3\.(1[1-9]|[2-9][0-9])"; then \
+			echo $$cmd; \
+			exit 0; \
+		fi; \
+	done; \
+	command -v python3.12 2>/dev/null || command -v python3.11 2>/dev/null || echo python3)
+	
 # Create venv with access to system packages (from stage 0 container)
 $(VENV_DIR)/bin/activate:
 	rm -rf $(VENV_DIR)
-	python3 -m venv $(VENV_DIR) --system-site-packages
+	$(UV) venv $(VENV_DIR) --python $(PYTHON) --system-site-packages
 
 venv: $(VENV_DIR)/bin/activate
 
