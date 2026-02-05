@@ -20,7 +20,21 @@ This repository includes a VS Code development container configuration that can 
 2. **Install Docker** and ensure it's running
 3. **For GPU support**: Install NVIDIA Container Toolkit (for Linux) or Docker Desktop with GPU support
 
-After the container is launched you can install femtotransformer, run the following command:
+#### Manual Configuration
+
+Modify the `service` field in `.devcontainer/devcontainer.json`:
+
+```json
+{
+  "service": "torch.dev.gpu"
+}
+```
+
+```
+make docker-build
+make docker-run
+```
+After changing the service configuration, close and reopen VS Code, then select "Reopen in Container" when prompted. After the container is launched, run the following command:
 
 ```bash
 make start
@@ -55,42 +69,6 @@ The repository supports multiple container configurations:
 
 * **`dev`**: Standard PyTorch development environment  
 * **`ros`**: ROS development environment with GPU support
-
-#### Using Shell Script (Recommended)
-
-Switch between services using the provided shell script:
-
-```bash
-# Configure for PyTorch development
-./devcontainer.sh dev
-
-# Configure for ROS development  
-./devcontainer.sh ros
-```
-
-The script will:
-1. Update the `.devcontainer/devcontainer.json` service configuration
-2. Update environment files (`.env` and `.devcontainer/devcontainer.env`)
-3. Optionally launch VS Code for you
-
-#### Manual Configuration
-
-To manually switch services, modify the `service` field in `.devcontainer/devcontainer.json`:
-
-```json
-{
-  "service": "torch.dev.gpu"  // or "ros.dev.gpu"
-}
-```
-
-After changing the service configuration, close and reopen VS Code, then select "Reopen in Container" when prompted.
-
-## What should I do with it?
-
-* Follow all instructions under [resources in the class website](https://pantelis.github.io/aiml-common/resources/environment/) as you will need it to submit your work.
-* Familiarize yourself with the `uv` package manager as you will use it to build and manage all your dependencies.
-* Follow the instructions in the course web site under resources to [submit your github repo to the course's LLM system](https://pantelis.github.io/aiml-common/resources/environment/assignment-submission.html) (Canvas/Brightspace).
-
 
 ### Additional Notes for ROS Development
 

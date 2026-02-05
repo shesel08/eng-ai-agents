@@ -17,7 +17,7 @@ PYTHON := $(shell \
 		fi; \
 	done; \
 	command -v python3.12 2>/dev/null || command -v python3.11 2>/dev/null || echo python3)
-	
+
 # Create venv with access to system packages (from stage 0 container)
 $(VENV_DIR)/bin/activate:
 	rm -rf $(VENV_DIR)
@@ -150,6 +150,8 @@ docker-run-ros:
 		-v $(PWD):/workspace \
 		-w /workspace \
 		eng-ai-agents:ros
+
+docker-run: docker-run-cpu
 
 # Development setup
 setup-dev: install-dev
