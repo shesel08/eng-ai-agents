@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 15
+names: ['bumper', 'door', 'emblem', 'exhaust', 'fog_light', 'grille', 'headlight', 'hood', 'side_mirror', 'taillight', 'tire', 'trunk', 'wheel', 'window', 'windshield']
+
+roboflow:
+  workspace: carsegmentation-bzjom
+  project: car-object-detection-he5nw
+  version: 1
+  license: Private
+  url: https://app.roboflow.com/carsegmentation-bzjom/car-object-detection-he5nw/1
