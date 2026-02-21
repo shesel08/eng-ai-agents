@@ -78,7 +78,7 @@ You can connect to the foxglove app using the following command:
 ros2 launch foxglove_bridge foxglove_bridge_launch.xml
 ```
 ## Past Week Assignment
-1. assignments/assignment-1 contains all the files related to assignment-1. 
+1. assignments/assignment-1/low_rank_gaussians.ipynb has the code for assignment-1. The assignment-1 folder contains other files required part of assignment completion. 
 
 ## Current Week Assignment
-1. assignments/assignment-2. assignment_2.ipynb has the yolo model code to train, predict the car segmentation dataset. video_detections.parquet is the file uploaded to hugging face after prediction.car-object-detection folder contains both images and labels for training, validation and testing. 
+1. assignments/assignment-2/assignment_2.ipynb. This notebook has the yolo model code to train, predict the car segmentation dataset. video_detections.parquet is the file uploaded to hugging face after prediction.car-object-detection folder contains both images and labels for training, validation and testing. 

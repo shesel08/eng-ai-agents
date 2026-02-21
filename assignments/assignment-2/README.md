@@ -10,6 +10,9 @@ Roboflow is used to process the youtube video on Toyota RAV4 review offline and 
 
 The folder car-object-detection has all the training, validation and test images along with their labels. assignment_2.ipynb file has the code to train the yolo 26 model and run it on the data query images from hugging face to predict their class labels. 
 
+
 ## Output format
-The yolo model does not output the video id or frame id as metadata. Hence created a dataframe with information from training dataset and kept it aside. Later while predicting, combined the data into the parquet file.
-The created parquet file is uploaded to hugging face repository and displayed the first 5 of the entries of the file as a using pandas dataframe head. 
+YOLO models does not output the video id or frame id as metadata in label file, instead those are added as part of filename. Hence created a dataframe with these information from training dataset and kept it later use (create_yolo_dataframe method does it). Later while predicting, combined the data into the parquet file.
+The created parquet file is uploaded to hugging face repository and displayed the first 5 of the entries of the file as a using pandas dataframe head. The video id and frame index is limited to first 5 items in the list.
+
+Note: The notebook was run in Google Collab for GPU
