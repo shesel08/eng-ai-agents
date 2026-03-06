@@ -14,6 +14,7 @@ services:
       - "${DEV_PORT:-8000}:8000"
     volumes:
       - .:${WORKSPACE_DIR:-/workspaces/eng-ai-agents}
+      - ${SSH_AUTH_SOCK:-/dev/null}:/ssh-agent
     working_dir: ${WORKSPACE_DIR:-/workspaces/eng-ai-agents}
     environment:
       - PATH=${WORKSPACE_DIR:-/workspaces/eng-ai-agents}/.venv/bin:$PATH
@@ -21,6 +22,7 @@ services:
       - VIRTUAL_ENV=${WORKSPACE_DIR:-/workspaces/eng-ai-agents}/.venv
       - UV_CACHE_DIR=/home/${WORKSPACE_USER:-vscode}/.uv-cache
       - UV_EXTRA=${UV_EXTRA:-cpu}
+      - SSH_AUTH_SOCK=/ssh-agent
     env_file:
       - path: .env
         required: true
