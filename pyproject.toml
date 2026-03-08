@@ -54,6 +54,7 @@ notebooks = [
     "scikit-image>=0.22.0",
     "ffmpeg-python>=0.2.0",
     "yt-dlp>=2024.0.0",
+    "filterpy>=1.4.5",
 ]
 dev = [
     "pytest>=8.0.0",
