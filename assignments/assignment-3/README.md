@@ -30,8 +30,10 @@ Test Set - 285 Images
 
 #### Experiments
 With yolo8 model - 61 detections (notebook - assignment_3_yolo8.ipynb)
+
 With yolo26 model - 172 detections (notebook - assignment_3_yolo26.ipynb)
-With RT-DETR model - 617 detections (notebook - assignment_3_RT_DETR.ipynb, output and detections folder correspond to this model)
+
+With RT-DETR model - 617 detections (notebook - assignment_3_RT_DETR.ipynb, output and detections folder correspond to this model). Hence use RT-DETR model for detections.
 
 ### Kalman filter state design and noise parameters.
 The filter uses a 4-dimensional state vector representing the bounding box center position and it's firts-order velocity.
