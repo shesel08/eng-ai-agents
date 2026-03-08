@@ -10,7 +10,7 @@ Test Set - 285 Images
 
 3. Created frames 1/5 fps which resulted in 684 frames for both test videos. 
 
-4. After training the model, 61/684 frames had detections and were saved to /detections folder.
+4. After training the model, 172/684 frames had detections and were saved to /detections folder.
 
 ## Output folder
 /tracked_output - This has 2 videos tracking 61 frames & 34 total track(s) spawned.
