@@ -34,7 +34,20 @@ With yolo26 model - 172 detections (notebook - assignment_3_yolo26.ipynb)
 With RT-DETR model - 617 detections (notebook - assignment_3_RT_DETR.ipynb, output and detections folder correspond to this model)
 
 ### Kalman filter state design and noise parameters.
-Created with kf = KalmanFilter(dim_x=4, dim_z=2)
+The filter uses a 4-dimensional state vector representing the bounding box center position and it's firts-order velocity.
+
+Motion model:
+
+[[1, 0, dt, 0],
+[0, 1, 0, dt],
+[0, 0, 1,  0],
+[0, 0, 0,  1]]
+
+Observation Matrix:
+
+[[1, 0, 0, 0],
+[0, 1, 0, 0]]
+
 Measurement Noise - 10.0
 Process Noise - 0.1
 Initial uncertainty - 100.0
