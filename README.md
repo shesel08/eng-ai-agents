@@ -250,4 +250,4 @@ ssetup
 2. assignments/assignment-2/assignment_2.ipynb. This notebook has the yolo model code to train, predict the car segmentation dataset. video_detections.parquet is the file uploaded to hugging face after prediction.car-object-detection folder contains both images and labels for training, validation and testing. 
 
 ## Current Week Assignment
-1. assignments/assignment-3/assignment_3_colab.ipynb. This notebook has the yolo model code to train, predict the drone object detection dataset.
+1. assignments/assignment-3/assignment_3_RT_DETR.ipynb. This notebook has the yolo model code to train, predict the drone object detection dataset.
