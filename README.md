@@ -251,3 +251,11 @@ ssetup
 
 ## Current Week Assignment
 1. assignments/assignment-3/assignment_3_RT_DETR.ipynb. This notebook has the yolo model code to train, predict the drone object detection dataset.
+
+## Mid Term
+Trained both COCO MiniTrain and Drone using Faster R-CNN. Both the notebooks are available under assignments/mid-term/
+The answers to the questions are present in torchvision_frcnn_hpo_drone.ipynb notebook.
+
+W&B project link:  
+https://wandb.ai/ss5246-new-jersey-institute-of-technology/faster-rcnn-optuna-drone
+https://wandb.ai/ss5246-new-jersey-institute-of-technology/faster-rcnn-optuna-coco-minitrain
